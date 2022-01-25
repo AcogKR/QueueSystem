@@ -20,7 +20,7 @@ import java.util.UUID;
 public class QueueSystem extends JavaPlugin {
 
     public Boolean queueState = false;
-    public Map<Integer, UUID> queusMap = new HashMap<>();
+    public Map<UUID, Integer> queusMap = new HashMap<>();
     public ConfigData configData;
 
     @Override
