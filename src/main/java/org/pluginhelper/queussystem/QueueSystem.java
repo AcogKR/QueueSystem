@@ -1,17 +1,13 @@
 package org.pluginhelper.queussystem;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-import org.bukkit.Material;
-import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.pluginhelper.queussystem.command.QueueCommand;
 import org.pluginhelper.queussystem.listener.QueueListener;
 
 import java.io.File;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -40,13 +36,18 @@ public class QueueSystem extends JavaPlugin {
         if (!file.exists()) {
             getConfig().set("Objects.QueueSystem.max-players", 100);
             getConfig().set("Objects.QueueSystem.queue-message-second", 10);
+            getConfig().set("QueueSystem.join-message", Arrays.asList(
+                    "hello world",
+                    "welcome New Player"
+            ));
             saveConfig();
         }
 
         YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
         this.configData = new ConfigData(
                 config.getInt("QueueSystem.max-players"),
-                config.getInt("QueueSystem.queue-message-second")
+                config.getInt("QueueSystem.queue-message-second"),
+                config.getStringList("QueueSystem.join-message")
         );
     }
 }
